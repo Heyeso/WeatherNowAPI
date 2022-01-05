@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 //Rate Limiting
 const limitPerDay = rateLimit({
   windowMs: 24 * 60 * 60 * 1000,
-  max: 5,
+  max: 60,
   message: "Rate limit exhausted by this IP, please try again after 24 hours.",
 });
 
@@ -23,7 +23,7 @@ const limitPerSec = rateLimit({
   message: "Too many requests, please try again after a few seconds.",
 });
 
-// app.use(limitPerDay);
+app.use(limitPerDay);
 app.use(limitPerSec);
 app.set("trust proxy", 1);
 
