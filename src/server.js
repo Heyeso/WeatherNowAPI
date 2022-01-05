@@ -11,12 +11,20 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 //Rate Limiting
-const limit = rateLimit({
+const limitPerDay = rateLimit({
   windowMs: 24 * 60 * 60 * 1000,
   max: 5,
+  message: "Rate limit exhausted by this IP, please try again after 24 hours.",
 });
 
-// app.use(limit);
+const limitPerSec = rateLimit({
+  windowMs: 3 * 1000,
+  max: 1,
+  message: "Too many requests, please try again after a few seconds.",
+});
+
+// app.use(limitPerDay);
+app.use(limitPerSec);
 app.set("trust proxy", 1);
 
 //Cors
