@@ -1,19 +1,44 @@
-var express = require("express");
+const express = require("express");
+const url = require("url");
 var router = express.Router();
+require("dotenv").config();
+const axios = require("axios").default;
 
-// middleware that is specific to this router
-router.use((req, res, next) => {
-  console.log("Time: ", new Date().toUTCString());
-  next();
-});
-
-// define the home page route
-router.get("/", (req, res) => {
-  res.send("Birds home page");
-});
-// define the about route
-router.get("/about", (req, res) => {
-  res.send("About birds");
-});
+router.get(
+  "/",
+  (req, res, next) => {
+    const Params = url.parse(req.url, true).query;
+    if (Params.state) {
+      axios
+        .get(`${process.env.API_URL_SEARCH}`, {
+          params: {
+            q: Params.state,
+            APPID: process.env.API_KEY,
+          },
+        })
+        .then((response) => response.data)
+        .then((data) => res.status(data.cod).send(data))
+        .catch((error) =>
+          res.status(error.response.status).send({
+            ...error.response.data,
+          })
+        );
+    } else next();
+  },
+  (req, res, next) => {
+    const Params = url.parse(req.url, true).query;
+    if (Params.lat && Params.lon)
+      res.status(200).send({
+        latitude: Params.lat,
+        longitude: Params.lon,
+      });
+    else next();
+  },
+  (req, res) => {
+    res.status(400).send({
+      message: "The request cannot be fulfilled due to bad syntax.",
+    });
+  }
+);
 
 module.exports = router;
