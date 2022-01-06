@@ -3,6 +3,10 @@ const url = require("url");
 var router = express.Router();
 require("dotenv").config();
 const axios = require("axios").default;
+const {
+  OpenWeatherDataHandler,
+  OpenWeatherSearchDataHandler,
+} = require("./../dataHandlers/openweather.data");
 
 router.get(
   "/",
@@ -17,11 +21,19 @@ router.get(
           },
         })
         .then((response) => response.data)
-        .then((data) => res.status(data.cod).send(data))
+        .then((data) =>
+          res.status(data.cod).send(OpenWeatherSearchDataHandler(data))
+        )
         .catch((error) =>
-          res.status(error.response.status).send({
-            ...error.response.data,
-          })
+          error.response
+            ? res.status(error.response.status).send({
+                ...error.response.data,
+              })
+            : res.status(500).send({
+                error: error,
+                message:
+                  "The server encountered an unexpected condition which prevented it from fulfilling the request.",
+              })
         );
     } else next();
   },
@@ -33,15 +45,25 @@ router.get(
           params: {
             lat: Params.lat,
             lon: Params.lon,
+            exclude: "minutely,hourly,alerts",
             APPID: process.env.API_KEY,
           },
         })
-        .then((response) => response.data)
-        .then((data) => res.status(data.cod).send(data))
+        .then((response) => {
+          res.status(response.status);
+          return response.data;
+        })
+        .then((data) => res.send(OpenWeatherDataHandler(data)))
         .catch((error) =>
-          res.status(error.response.status).send({
-            ...error.response.data,
-          })
+          error.status
+            ? res.status(400).send({
+                ...error.status,
+              })
+            : res.status(500).send({
+                error: error.message,
+                message:
+                  "The server encountered an unexpected condition which prevented it from fulfilling the request.",
+              })
         );
     } else next();
   },
