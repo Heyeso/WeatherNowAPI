@@ -12,18 +12,33 @@ router.get(
   "/",
   (req, res, next) => {
     const Params = url.parse(req.url, true).query;
-    if (Params.state) {
+    if (Params.state || (Params.lat && Params.lon)) {
+      let customParams = {};
+      if (Params.state) customParams = { q: Params.state };
+      if (Params.lat && Params.lon)
+        customParams = {
+          lat: Params.lat,
+          lon: Params.lon,
+        };
       axios
         .get(`${process.env.API_URL_SEARCH}`, {
           params: {
-            q: Params.state,
+            ...customParams,
             APPID: process.env.API_KEY,
           },
         })
         .then((response) => response.data)
-        .then((data) =>
-          res.status(data.cod).send(OpenWeatherSearchDataHandler(data))
-        )
+        .then((data) => {
+          if (Params.state)
+            res.status(data.cod).send(OpenWeatherSearchDataHandler(data));
+          if (Params.lat && Params.lon) {
+            res.locals.Location = {
+              city: data.name,
+              country: data.sys.country,
+            };
+            next();
+          }
+        })
         .catch((error) =>
           error.response
             ? res.status(error.response.status).send({
@@ -53,7 +68,9 @@ router.get(
           res.status(response.status);
           return response.data;
         })
-        .then((data) => res.send(OpenWeatherDataHandler(data)))
+        .then((data) =>
+          res.send({ ...res.locals.Location, ...OpenWeatherDataHandler(data) })
+        )
         .catch((error) =>
           error.status
             ? res.status(400).send({

@@ -1,72 +1,102 @@
+const Atmosphere = (code) => {
+  if (code >= 700 && code < 800) return true;
 
+  return false;
+};
 const OpenWeatherDataHandler = (data) => {
   if (data) {
     return {
       sunrise: data.current.sunrise,
-      sunset: data.current.sunrise,
+      sunset: data.current.sunset,
       temperature: data.current.temp,
       weather: {
-        main: data.current.weather[0].main,
+        main: Atmosphere(data.current.weather[0].id)
+          ? "Atmosphere"
+          : data.current.weather[0].main,
         description: data.current.weather[0].description,
       },
       daily: [
         {
           temperature: {
-            day: data.daily[0].temp.day,
-            night: data.daily[0].temp.night,
+            max: data.daily[0].temp.max,
+            min: data.daily[0].temp.min,
           },
           weather: {
-            main: data.daily[0].weather[0].main,
+            main: Atmosphere(data.daily[0].weather[0].id)
+              ? "Atmosphere"
+              : data.daily[0].weather[0].main,
             description: data.daily[0].weather[0].description,
           },
         },
         {
           temperature: {
-            day: data.daily[1].temp.day,
-            night: data.daily[1].temp.night,
+            max: data.daily[1].temp.max,
+            min: data.daily[1].temp.min,
           },
           weather: {
-            main: data.daily[1].weather[0].main,
+            main: Atmosphere(data.daily[1].weather[0].id)
+              ? "Atmosphere"
+              : data.daily[1].weather[0].main,
             description: data.daily[1].weather[0].description,
           },
         },
         {
           temperature: {
-            day: data.daily[2].temp.day,
-            night: data.daily[2].temp.night,
+            max: data.daily[2].temp.max,
+            min: data.daily[2].temp.min,
           },
           weather: {
-            main: data.daily[2].weather[0].main,
+            main: Atmosphere(data.daily[2].weather[0].id)
+              ? "Atmosphere"
+              : data.daily[2].weather[0].main,
             description: data.daily[2].weather[0].description,
           },
         },
         {
           temperature: {
-            day: data.daily[3].temp.day,
-            night: data.daily[3].temp.night,
+            max: data.daily[3].temp.max,
+            min: data.daily[3].temp.min,
           },
           weather: {
-            main: data.daily[3].weather[0].main,
+            main: Atmosphere(data.daily[3].weather[0].id)
+              ? "Atmosphere"
+              : data.daily[3].weather[0].main,
             description: data.daily[3].weather[0].description,
           },
         },
         {
           temperature: {
-            day: data.daily[4].temp.day,
-            night: data.daily[4].temp.night,
+            max: data.daily[4].temp.max,
+            min: data.daily[4].temp.min,
           },
           weather: {
-            main: data.daily[4].weather[0].main,
+            main: Atmosphere(data.daily[4].weather[0].id)
+              ? "Atmosphere"
+              : data.daily[4].weather[0].main,
             description: data.daily[4].weather[0].description,
           },
         },
         {
           temperature: {
-            day: data.daily[5].temp.day,
-            night: data.daily[5].temp.night,
+            max: data.daily[5].temp.max,
+            min: data.daily[5].temp.min,
           },
           weather: {
-            main: data.daily[5].weather[0].main,
+            main: Atmosphere(data.daily[5].weather[0].id)
+              ? "Atmosphere"
+              : data.daily[5].weather[0].main,
+            description: data.daily[5].weather[0].description,
+          },
+        },
+        {
+          temperature: {
+            max: data.daily[6].temp.max,
+            min: data.daily[6].temp.min,
+          },
+          weather: {
+            main: Atmosphere(data.daily[5].weather[0].id)
+              ? "Atmosphere"
+              : data.daily[6].weather[0].main,
             description: data.daily[5].weather[0].description,
           },
         },
@@ -89,7 +119,9 @@ const OpenWeatherSearchDataHandler = (data) => {
       sunset: data.sys.sunset,
       temperature: data.main.temp,
       weather: {
-        main: data.weather[0].main,
+        main: Atmosphere(data.weather[0].id)
+          ? "Atmosphere"
+          : data.weather[0].main,
         description: data.weather[0].description,
       },
     };
