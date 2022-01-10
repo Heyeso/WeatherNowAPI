@@ -3,25 +3,52 @@ const url = require("url");
 var router = express.Router();
 require("dotenv").config();
 const axios = require("axios").default;
+const {
+  OpenWeatherDataHandler,
+  OpenWeatherSearchDataHandler,
+} = require("./../dataHandlers/openweather.data");
 
 router.get(
   "/",
   (req, res, next) => {
     const Params = url.parse(req.url, true).query;
-    if (Params.state) {
+    if (Params.state || (Params.lat && Params.lon)) {
+      let customParams = {};
+      if (Params.state) customParams = { q: Params.state };
+      if (Params.lat && Params.lon)
+        customParams = {
+          lat: Params.lat,
+          lon: Params.lon,
+        };
       axios
         .get(`${process.env.API_URL_SEARCH}`, {
           params: {
-            q: Params.state,
+            ...customParams,
             APPID: process.env.API_KEY,
           },
         })
         .then((response) => response.data)
-        .then((data) => res.status(data.cod).send(data))
+        .then((data) => {
+          if (Params.state)
+            res.status(data.cod).send(OpenWeatherSearchDataHandler(data));
+          if (Params.lat && Params.lon) {
+            res.locals.Location = {
+              city: data.name,
+              country: data.sys.country,
+            };
+            next();
+          }
+        })
         .catch((error) =>
-          res.status(error.response.status).send({
-            ...error.response.data,
-          })
+          error.response
+            ? res.status(error.response.status).send({
+                ...error.response.data,
+              })
+            : res.status(500).send({
+                error: error,
+                message:
+                  "The server encountered an unexpected condition which prevented it from fulfilling the request.",
+              })
         );
     } else next();
   },
@@ -33,15 +60,27 @@ router.get(
           params: {
             lat: Params.lat,
             lon: Params.lon,
+            exclude: "minutely,hourly,alerts",
             APPID: process.env.API_KEY,
           },
         })
-        .then((response) => response.data)
-        .then((data) => res.status(data.cod).send(data))
+        .then((response) => {
+          res.status(response.status);
+          return response.data;
+        })
+        .then((data) =>
+          res.send({ ...res.locals.Location, ...OpenWeatherDataHandler(data) })
+        )
         .catch((error) =>
-          res.status(error.response.status).send({
-            ...error.response.data,
-          })
+          error.status
+            ? res.status(400).send({
+                ...error.status,
+              })
+            : res.status(500).send({
+                error: error.message,
+                message:
+                  "The server encountered an unexpected condition which prevented it from fulfilling the request.",
+              })
         );
     } else next();
   },
