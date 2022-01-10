@@ -9,6 +9,8 @@ const OpenWeatherDataHandler = (data) => {
       sunrise: data.current.sunrise,
       sunset: data.current.sunset,
       temperature: data.current.temp,
+      feels_like: data.current.feels_like,
+      wind_speed: data.current.wind_speed,
       weather: {
         main: Atmosphere(data.current.weather[0].id)
           ? "Atmosphere"
@@ -118,6 +120,8 @@ const OpenWeatherSearchDataHandler = (data) => {
       sunrise: data.sys.sunrise,
       sunset: data.sys.sunset,
       temperature: data.main.temp,
+      feels_like: data.main.temp,
+      wind_speed: data.wind.speed,
       weather: {
         main: Atmosphere(data.weather[0].id)
           ? "Atmosphere"

@@ -14,13 +14,22 @@ const port = process.env.PORT || 3000;
 const limitPerDay = rateLimit({
   windowMs: 24 * 60 * 60 * 1000,
   max: 60,
-  message: "Rate limit exhausted by this IP, please try again after 24 hours.",
+  handler: function (req, res /*next*/) {
+    return res.status(429).send({
+      error:
+        "Rate limit exhausted by this IP, please try again after 24 hours.",
+    });
+  },
 });
 
 const limitPerSec = rateLimit({
   windowMs: 3 * 1000,
   max: 1,
-  message: "Too many requests, please try again after a few seconds.",
+  handler: function (req, res /*next*/) {
+    return res.status(429).send({
+      error: "Too many requests, please try again after a few seconds.",
+    });
+  },
 });
 
 app.use(limitPerSec);
