@@ -50,58 +50,30 @@ app.get("/", (req, res) => {
   res.send({
     city: "Carney",
     country: "US",
-    sunrise: 1641558363,
-    sunset: 1641592682,
-    temperature: 271.8,
+    sunrise: 1641817537,
+    sunset: 1641852057,
+    temperature: 273.5,
+    feels_like: 270.82,
+    wind_speed: 2.24,
     weather: {
-      main: "Snow",
-      description: "snow",
+      main: "Clouds",
+      description: "few clouds",
     },
     daily: [
       {
         temperature: {
-          max: 271.99,
-          min: 266.94,
-        },
-        weather: {
-          main: "Snow",
-          description: "snow",
-        },
-      },
-      {
-        temperature: {
-          max: 271.4,
-          min: 265.18,
-        },
-        weather: {
-          main: "Clear",
-          description: "clear sky",
-        },
-      },
-      {
-        temperature: {
-          max: 277.71,
-          min: 270.04,
-        },
-        weather: {
-          main: "Rain",
-          description: "moderate rain",
-        },
-      },
-      {
-        temperature: {
-          max: 276.55,
-          min: 268.44,
+          max: 276.26,
+          min: 269.56,
         },
         weather: {
           main: "Clouds",
-          description: "broken clouds",
+          description: "few clouds",
         },
       },
       {
         temperature: {
-          max: 268.46,
-          min: 265.87,
+          max: 269.46,
+          min: 266.07,
         },
         weather: {
           main: "Clouds",
@@ -110,22 +82,52 @@ app.get("/", (req, res) => {
       },
       {
         temperature: {
-          max: 272.88,
-          min: 266.21,
+          max: 277.68,
+          min: 269.08,
         },
         weather: {
           main: "Clouds",
-          description: "broken clouds",
+          description: "few clouds",
         },
       },
       {
         temperature: {
-          max: 276.62,
-          min: 271.93,
+          max: 278.62,
+          min: 273.15,
         },
         weather: {
           main: "Clouds",
-          description: "broken clouds",
+          description: "overcast clouds",
+        },
+      },
+      {
+        temperature: {
+          max: 275.23,
+          min: 263.66,
+        },
+        weather: {
+          main: "Clear",
+          description: "clear sky",
+        },
+      },
+      {
+        temperature: {
+          max: 267.23,
+          min: 262.3,
+        },
+        weather: {
+          main: "Clouds",
+          description: "overcast clouds",
+        },
+      },
+      {
+        temperature: {
+          max: 271.92,
+          min: 265.98,
+        },
+        weather: {
+          main: "Clouds",
+          description: "overcast clouds",
         },
       },
     ],

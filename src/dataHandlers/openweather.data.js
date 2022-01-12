@@ -29,6 +29,7 @@ const OpenWeatherDataHandler = (data) => {
               : data.daily[0].weather[0].main,
             description: data.daily[0].weather[0].description,
           },
+          wind_speed: data.daily[0].wind_speed
         },
         {
           temperature: {
@@ -41,6 +42,7 @@ const OpenWeatherDataHandler = (data) => {
               : data.daily[1].weather[0].main,
             description: data.daily[1].weather[0].description,
           },
+          wind_speed: data.daily[1].wind_speed
         },
         {
           temperature: {
@@ -53,6 +55,7 @@ const OpenWeatherDataHandler = (data) => {
               : data.daily[2].weather[0].main,
             description: data.daily[2].weather[0].description,
           },
+          wind_speed: data.daily[2].wind_speed
         },
         {
           temperature: {
@@ -65,6 +68,7 @@ const OpenWeatherDataHandler = (data) => {
               : data.daily[3].weather[0].main,
             description: data.daily[3].weather[0].description,
           },
+          wind_speed: data.daily[3].wind_speed
         },
         {
           temperature: {
@@ -77,6 +81,7 @@ const OpenWeatherDataHandler = (data) => {
               : data.daily[4].weather[0].main,
             description: data.daily[4].weather[0].description,
           },
+          wind_speed: data.daily[4].wind_speed
         },
         {
           temperature: {
@@ -89,6 +94,7 @@ const OpenWeatherDataHandler = (data) => {
               : data.daily[5].weather[0].main,
             description: data.daily[5].weather[0].description,
           },
+          wind_speed: data.daily[5].wind_speed
         },
         {
           temperature: {
@@ -101,6 +107,7 @@ const OpenWeatherDataHandler = (data) => {
               : data.daily[6].weather[0].main,
             description: data.daily[5].weather[0].description,
           },
+          wind_speed: data.daily[6].wind_speed
         },
       ],
     };
