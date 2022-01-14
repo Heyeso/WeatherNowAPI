@@ -48,87 +48,94 @@ app.use(
 
 app.get("/", (req, res) => {
   res.send({
-    city: "Carney",
+    city: "Perry Hall",
     country: "US",
-    sunrise: 1641817537,
-    sunset: 1641852057,
-    temperature: 273.5,
-    feels_like: 270.82,
-    wind_speed: 2.24,
+    sunrise: 1641990309,
+    sunset: 1642024979,
+    temperature: 277.83,
+    feels_like: 277.83,
+    wind_speed: 0.45,
     weather: {
-      main: "Clouds",
-      description: "few clouds",
+      main: "Clear",
+      description: "clear sky",
     },
     daily: [
       {
         temperature: {
-          max: 276.26,
-          min: 269.56,
+          max: 278.27,
+          min: 269.21,
         },
         weather: {
           main: "Clouds",
-          description: "few clouds",
+          description: "broken clouds",
         },
+        wind_speed: 5.66,
       },
       {
         temperature: {
-          max: 269.46,
-          min: 266.07,
+          max: 279.79,
+          min: 274.91,
+        },
+        weather: {
+          main: "Clouds",
+          description: "overcast clouds",
+        },
+        wind_speed: 2.21,
+      },
+      {
+        temperature: {
+          max: 278.51,
+          min: 267.16,
         },
         weather: {
           main: "Clouds",
           description: "scattered clouds",
         },
+        wind_speed: 8.73,
       },
       {
         temperature: {
-          max: 277.68,
-          min: 269.08,
-        },
-        weather: {
-          main: "Clouds",
-          description: "few clouds",
-        },
-      },
-      {
-        temperature: {
-          max: 278.62,
-          min: 273.15,
+          max: 268.44,
+          min: 265.24,
         },
         weather: {
           main: "Clouds",
           description: "overcast clouds",
         },
+        wind_speed: 8.09,
       },
       {
         temperature: {
-          max: 275.23,
-          min: 263.66,
+          max: 275.54,
+          min: 263.47,
         },
         weather: {
-          main: "Clear",
-          description: "clear sky",
+          main: "Snow",
+          description: "rain and snow",
         },
+        wind_speed: 11.82,
       },
       {
         temperature: {
-          max: 267.23,
-          min: 262.3,
+          max: 280.41,
+          min: 271.95,
+        },
+        weather: {
+          main: "Snow",
+          description: "rain and snow",
+        },
+        wind_speed: 9.03,
+      },
+      {
+        temperature: {
+          max: 271.94,
+          min: 269.14,
         },
         weather: {
           main: "Clouds",
-          description: "overcast clouds",
+          description: "rain and snow",
         },
-      },
-      {
-        temperature: {
-          max: 271.92,
-          min: 265.98,
-        },
-        weather: {
-          main: "Clouds",
-          description: "overcast clouds",
-        },
+        wind_speed: 8.57,
       },
     ],
   });
