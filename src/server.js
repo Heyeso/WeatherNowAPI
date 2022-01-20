@@ -50,94 +50,164 @@ app.get("/", (req, res) => {
   res.send({
     city: "Perry Hall",
     country: "US",
-    sunrise: 1641990309,
-    sunset: 1642024979,
-    temperature: 277.83,
-    feels_like: 277.83,
-    wind_speed: 0.45,
+    min: 277.03,
+    max: 284.14,
+    sunrise: 1642594946,
+    sunset: 1642630234,
+    temperature: 280.54,
+    uvi: 0,
+    humidity: 63,
+    feels_like: 278.26,
+    wind_speed: 7.6,
     weather: {
-      main: "Clear",
-      description: "clear sky",
+      main: "Clouds",
+      description: "scattered clouds",
     },
+    hourly: [
+      {
+        temperature: 280.54,
+        humidity: 63,
+        weather: {
+          main: "Clouds",
+          description: "scattered clouds",
+        },
+      },
+      {
+        temperature: 280.2,
+        humidity: 68,
+        weather: {
+          main: "Clouds",
+          description: "broken clouds",
+        },
+      },
+      {
+        temperature: 279.86,
+        humidity: 73,
+        weather: {
+          main: "Clouds",
+          description: "broken clouds",
+        },
+      },
+      {
+        temperature: 279.41,
+        humidity: 80,
+        weather: {
+          main: "Clouds",
+          description: "broken clouds",
+        },
+      },
+      {
+        temperature: 278.8,
+        humidity: 87,
+        weather: {
+          main: "Rain",
+          description: "light rain",
+        },
+      },
+    ],
     daily: [
       {
         temperature: {
-          max: 278.27,
-          min: 269.21,
+          max: 281.99,
+          min: 272.89,
+        },
+        weather: {
+          main: "Rain",
+          description: "light rain",
+        },
+        wind_speed: 6,
+        humidity: 57,
+      },
+      {
+        temperature: {
+          max: 278.19,
+          min: 265.14,
+        },
+        weather: {
+          main: "Snow",
+          description: "rain and snow",
+        },
+        wind_speed: 6.8,
+        humidity: 77,
+      },
+      {
+        temperature: {
+          max: 268.23,
+          min: 262.87,
         },
         weather: {
           main: "Clouds",
           description: "broken clouds",
         },
-        wind_speed: 5.66,
+        wind_speed: 6.2,
+        humidity: 66,
       },
       {
         temperature: {
-          max: 279.79,
-          min: 274.91,
+          max: 270.07,
+          min: 263.23,
         },
         weather: {
-          main: "Clouds",
-          description: "overcast clouds",
+          main: "Clear",
+          description: "clear sky",
         },
-        wind_speed: 2.21,
+        wind_speed: 4,
+        humidity: 55,
       },
       {
         temperature: {
-          max: 278.51,
-          min: 267.16,
+          max: 274.17,
+          min: 267.09,
         },
         weather: {
           main: "Clouds",
           description: "scattered clouds",
         },
-        wind_speed: 8.73,
+        wind_speed: 2.5,
+        humidity: 55,
       },
       {
         temperature: {
-          max: 268.44,
-          min: 265.24,
+          max: 275.44,
+          min: 270.65,
         },
         weather: {
           main: "Clouds",
-          description: "overcast clouds",
+          description: "few clouds",
         },
-        wind_speed: 8.09,
+        wind_speed: 2.6,
+        humidity: 60,
       },
       {
         temperature: {
-          max: 275.54,
-          min: 263.47,
-        },
-        weather: {
-          main: "Snow",
-          description: "rain and snow",
-        },
-        wind_speed: 11.82,
-      },
-      {
-        temperature: {
-          max: 280.41,
-          min: 271.95,
-        },
-        weather: {
-          main: "Snow",
-          description: "rain and snow",
-        },
-        wind_speed: 9.03,
-      },
-      {
-        temperature: {
-          max: 271.94,
-          min: 269.14,
+          max: 277.69,
+          min: 272.64,
         },
         weather: {
           main: "Clouds",
-          description: "rain and snow",
+          description: "few clouds",
         },
-        wind_speed: 8.57,
+        wind_speed: 4.4,
+        humidity: 78,
       },
     ],
+  });
+});
+app.get("/search", (req, res) => {
+  res.send({
+    city: "Rosedale",
+    country: "US",
+    sunrise: 1642508571,
+    sunset: 1642543784,
+    temperature: 276.07,
+    min: 274.95,
+    max: 277.2,
+    feels_like: 276.07,
+    wind_speed: 2.68,
+    weather: {
+      main: "Clouds",
+      description: "broken clouds",
+    },
   });
 });
 

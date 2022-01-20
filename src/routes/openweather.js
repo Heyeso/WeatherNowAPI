@@ -35,6 +35,8 @@ router.get(
             res.locals.Location = {
               city: data.name,
               country: data.sys.country,
+              min: data.main.temp_min,
+              max: data.main.temp_max,
             };
             next();
           }
@@ -60,7 +62,7 @@ router.get(
           params: {
             lat: Params.lat,
             lon: Params.lon,
-            exclude: "minutely,hourly,alerts",
+            exclude: "minutely,alerts",
             APPID: process.env.API_KEY,
           },
         })
